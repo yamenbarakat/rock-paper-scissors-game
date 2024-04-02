@@ -1,0 +1,261 @@
+@use "./color";
+
+/**************************************/ /* header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  outline: 3px solid color.$header_outline;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 10rem;
+
+  .logo {
+    display: flex;
+    font-size: 2rem;
+    flex-direction: column;
+    color: color.$white;
+    text-transform: uppercase;
+    line-height: 0.9;
+    padding-left: 1rem;
+  }
+
+  .score-container {
+    padding: 1.2rem 2.2rem;
+    background-color: color.$white;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 1;
+
+    p {
+      color: color.$score_text;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 1rem;
+    }
+
+    .score-number {
+      font-size: 4rem;
+      font-weight: 700;
+      color: color.$dark_text;
+    }
+  }
+}
+
+/**************************************/
+/* main */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 2rem 4rem;
+    background-image: url("/bg-triangle.svg");
+    background-repeat: no-repeat;
+    background-position: 50% 60%;
+    background-size: 20rem;
+  }
+
+  .paper-img,
+  .scissors-img,
+  .rock-img,
+  .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .paper-img,
+  .scissors-img,
+  .rock-img {
+    width: 12.5rem;
+    height: 12.5rem;
+    box-shadow: inset 0 -0.6rem rgba(0, 0, 0, 15%);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .circle {
+    width: 10rem;
+    height: 10rem;
+    background-color: color.$white;
+    box-shadow: inset 0 0.6rem rgba(0, 0, 0, 15%);
+  }
+
+  .paper-img {
+    background-image: linear-gradient(
+      to bottom,
+      hsl(230, 89%, 62%),
+      hsl(230, 89%, 65%)
+    );
+  }
+
+  .scissors-img {
+    background-image: linear-gradient(
+      to bottom,
+      hsl(39, 89%, 49%),
+      hsl(40, 84%, 53%)
+    );
+  }
+
+  .rock-img {
+    background-image: linear-gradient(
+      to bottom,
+      hsl(349, 71%, 52%),
+      hsl(349, 70%, 56%)
+    );
+  }
+
+  .icons > div:last-child {
+    grid-column: 2 span;
+  }
+
+  /**************************************/
+  /* picked icons */
+  .picked-icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4.2rem 2.2rem;
+    width: 100%;
+    justify-items: center;
+  }
+
+  .user-picked,
+  .computer-picked {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  .computer-picked .picking {
+    background-color: hsl(237, 49%, 15%);
+    opacity: 0.5;
+    border-radius: 50%;
+    animation: on-off 0.5s alternate infinite;
+  }
+
+  @keyframes on-off {
+    from {
+      opacity: 0.8;
+    }
+
+    to {
+      opacity: 0.4;
+    }
+  }
+
+  .computer-picked .img {
+    opacity: 0;
+    transition: opacity 0.3s;
+    width: 12.5rem;
+    height: 12.5rem;
+  }
+
+  .computer-picked .img.show {
+    opacity: 1;
+  }
+
+  .picked-icons p {
+    color: color.$white;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .result {
+    grid-column: 1 / -1;
+    text-align: center;
+    opacity: 0;
+    width: 0;
+    transition: all 1s;
+    z-index: 5;
+  }
+
+  .show.result {
+    width: auto;
+    opacity: 1;
+  }
+
+  .result p {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+  }
+
+  .result button {
+    background-color: color.$white;
+    border: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 1.5rem 5rem;
+    font-weight: 700;
+    border-radius: 6px;
+    color: color.$dark_text;
+  }
+}
+
+/**************************************/
+/* footer */
+
+footer {
+  .rules-btn-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .rules-btn {
+    background-color: transparent;
+    color: color.$white;
+    border: 1px solid color.$white;
+    padding: 1rem 3rem;
+    letter-spacing: 2px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+
+  .rules-info {
+    width: 100%;
+    height: 100%;
+    background-color: color.$white;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 20;
+  }
+
+  .rules-info h2 {
+    color: color.$dark_text;
+    font-size: 3rem;
+    text-transform: uppercase;
+  }
+
+  .rules-info img {
+    max-width: 400px;
+  }
+
+  .close-icon {
+    background-color: transparent;
+    border: none;
+  }
+
+  .close-icon svg {
+    stroke: color.$header_outline;
+    width: 30px;
+    height: 30px;
+    opacity: 0.5;
+  }
+}
